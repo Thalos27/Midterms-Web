@@ -1,18 +1,18 @@
 import { useState } from "react";
 import Registration from "./components/Registration";
 import Table from "./components/Table";
+import Profile from "./components/Profile";
 
 function App() {
   const [guitars, setGuitars] = useState([]);
   const [selectedGuitar, setSelectedGuitar] = useState(null);
 
   const addGuitar = (newGuitar) => {
-    setGuitars([...guitars, newGuitar]);
+    setGuitars((currentGuitars) => [...currentGuitars, newGuitar]);
   };
 
   return (
     <div className="min-h-screen bg-[#e8f1f5] px-6 py-10 font-sans">
-
       <div className="mx-auto max-w-7xl">
 
         <div className="mb-7">
@@ -25,16 +25,19 @@ function App() {
 
           <Registration addGuitar={addGuitar} />
 
-          <Table
-            guitars={guitars}
-            selectedGuitar={selectedGuitar}
-            setSelectedGuitar={setSelectedGuitar}
-          />
+          <div className="space-y-8">
 
+            <Table
+              guitars={guitars}
+              selectedGuitar={selectedGuitar}
+              setSelectedGuitar={setSelectedGuitar}
+            />
+
+            <Profile selectedGuitar={selectedGuitar} />
+
+          </div>
         </div>
-
       </div>
-
     </div>
   );
 }
